@@ -16,11 +16,18 @@
 
 package com.example.android.common.media;
 
+import android.Manifest;
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.Context;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Environment;
 import android.util.Log;
+
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -118,6 +125,29 @@ public class CameraHelper {
      */
     public static Camera getDefaultFrontFacingCameraInstance() {
         return getDefaultCamera(Camera.CameraInfo.CAMERA_FACING_FRONT);
+    }
+
+    public static void checkCameraPermissions(Context context){
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED)
+        {
+            // Permission is not granted
+            Log.d("checkCameraPermissions", "No Camera Permissions");
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[] { Manifest.permission.CAMERA,  },
+                    100);
+        }
+
+
+        if (ContextCompat.checkSelfPermission(context, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED)
+        {
+            // Permission is not granted
+            Log.d("checkCameraPermissions", "No RECORD_AUDIO Permissions");
+            ActivityCompat.requestPermissions((Activity) context,
+                    new String[] { Manifest.permission.RECORD_AUDIO,  },
+                    100);
+        }
     }
 
 

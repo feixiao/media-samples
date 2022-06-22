@@ -137,6 +137,8 @@ public class MainActivity extends AppCompatActivity {
 
     private boolean prepareVideoRecorder() {
 
+       CameraHelper.checkCameraPermissions(this);
+
         // BEGIN_INCLUDE (configure_preview)
         mCamera = CameraHelper.getDefaultCameraInstance();
 
@@ -176,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         mMediaRecorder.setCamera(mCamera);
 
         // Step 2: Set sources
-        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.DEFAULT);
+        mMediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.CAMERA);
 
         // Step 3: Set a CamcorderProfile (requires API Level 8 or higher)
