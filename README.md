@@ -1,5 +1,17 @@
-Android Media Samples Repository
-================================
+### Android Media Samples Repository
 
-This repository contains a set of individual Android Studio projects to help you get
-started writing/understanding Android Media (audio, video, etc.).
+
+##### BasicMediaDecoder
+##### BasicMediaRouter
+##### MediaRecorder
++ 基于Camera、TextureView和MediaRecorder实现。
+
+##### MediaRouter
+##### MidiScope
+##### MidiSynth
+##### PictureInPicture
+##### PictureInPictureKotlin
+##### ScreenCapture
++ 基于MediaProtection实现。
+
+##### VideoPlayer

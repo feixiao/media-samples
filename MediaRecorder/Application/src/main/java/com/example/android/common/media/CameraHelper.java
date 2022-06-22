@@ -146,7 +146,7 @@ public class CameraHelper {
             Log.d("checkCameraPermissions", "No RECORD_AUDIO Permissions");
             ActivityCompat.requestPermissions((Activity) context,
                     new String[] { Manifest.permission.RECORD_AUDIO,  },
-                    100);
+                    101);
         }
     }
 
