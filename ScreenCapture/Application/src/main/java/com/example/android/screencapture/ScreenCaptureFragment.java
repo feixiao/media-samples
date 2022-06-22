@@ -1,4 +1,4 @@
-/*
+    /*
  * Copyright (C) 2014 The Android Open Source Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -91,6 +91,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         DisplayMetrics metrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         mScreenDensity = metrics.densityDpi;
+
         mMediaProjectionManager = (MediaProjectionManager)
                 activity.getSystemService(Context.MEDIA_PROJECTION_SERVICE);
     }
@@ -150,6 +151,7 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
     }
 
     private void setUpMediaProjection() {
+        // 真正的屏幕录制操作对象—— MediaProjection
         mMediaProjection = mMediaProjectionManager.getMediaProjection(mResultCode, mResultData);
     }
 
@@ -183,10 +185,14 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         Log.i(TAG, "Setting up a VirtualDisplay: " +
                 mSurfaceView.getWidth() + "x" + mSurfaceView.getHeight() +
                 " (" + mScreenDensity + ")");
+
+        // 创建一个虚拟屏幕——VirtualDisplay，这一步是屏幕录制的关键所在
+        // 这个 Surface 是由消费者去创建的。因此，这时候就要想想我们的消费者是什么？我们的场景是什么？是要录制成文件还是编码成数据传输出去实现录屏直播呢？
         mVirtualDisplay = mMediaProjection.createVirtualDisplay("ScreenCapture",
                 mSurfaceView.getWidth(), mSurfaceView.getHeight(), mScreenDensity,
                 DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
                 mSurface, null, null);
+
         mButtonToggle.setText(R.string.stop);
     }
 

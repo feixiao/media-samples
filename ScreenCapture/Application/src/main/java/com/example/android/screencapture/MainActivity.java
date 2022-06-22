@@ -50,7 +50,10 @@ public class MainActivity extends SampleActivityBase {
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+            // 创建ScreenCaptureFragment
             ScreenCaptureFragment fragment = new ScreenCaptureFragment();
+
             transaction.replace(R.id.sample_content_fragment, fragment);
             transaction.commit();
         }
