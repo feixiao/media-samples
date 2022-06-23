@@ -1,0 +1,3 @@
+[submodule "MediaProjectionDemo"]
+	path = MediaProjectionDemo
+	url = https://github.com/feixiao/MediaProjectionDemo.git
