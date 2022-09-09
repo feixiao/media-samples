@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.opengl.GLSurfaceView
+        android:id="@+id/mGLSurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="300dp" />
+
+    <Button
+        android:id="@+id/mNormalFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mGLSurfaceView"
+        android:gravity="center"
+        android:text="正常" />
+
+    <Button
+        android:id="@+id/mBeautyFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mNormalFilter"
+        android:gravity="center"
+        android:text="美颜" />
+
+    <Button
+        android:id="@+id/mBlackWhiteFilter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mBeautyFilter"
+        android:gravity="center"
+        android:text="黑白" />
+</RelativeLayout>
