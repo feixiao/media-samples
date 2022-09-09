@@ -15,3 +15,7 @@
 + 基于MediaProtection实现。
 
 ##### VideoPlayer
++ 基于ExoPlayer的播放器App
+
+##### XPlayer
++ 基于MediaPlayer + OpenGL ES的播放器App
