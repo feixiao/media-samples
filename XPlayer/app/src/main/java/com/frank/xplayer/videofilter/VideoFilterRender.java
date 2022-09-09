@@ -32,12 +32,14 @@ public class VideoFilterRender extends BaseGLSurfaceViewRenderer {
             0.0f, 0.0f,
             1.0f, 0.0f
     };
-    private int mTextureId;
-    private SurfaceTexture mSurfaceTexture;
     private final GLSurfaceView mGLSurfaceView;
-    private boolean mUpdateSurfaceTexture;
     private final FloatBuffer mVertextBuffer;
     private final FloatBuffer mTextureBuffer;
+    //绘制线程集合
+    private final Queue<Runnable> mRunOnDraw = new LinkedList();
+    private int mTextureId;
+    private SurfaceTexture mSurfaceTexture;
+    private boolean mUpdateSurfaceTexture;
     private BaseFilter mFilter = new BaseFilter();
     /**
      * 视频的宽高
@@ -53,8 +55,6 @@ public class VideoFilterRender extends BaseGLSurfaceViewRenderer {
      */
     private int mSurfaceWidth;
     private int mSurfaceHeight;
-    //绘制线程集合
-    private final Queue<Runnable> mRunOnDraw = new LinkedList();
     private IVideoTextureRenderListener mTextureRenderListener;
 
     public VideoFilterRender(GLSurfaceView surfaceView) {

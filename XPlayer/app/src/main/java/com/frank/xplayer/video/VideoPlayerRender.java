@@ -39,12 +39,12 @@ public class VideoPlayerRender extends BaseGLSurfaceViewRenderer {
             0.0f, 0.0f,
             1.0f, 0.0f
     };
-    private int mTextureId;
-    private SurfaceTexture mSurfaceTexture;
     private final GLSurfaceView mGLSurfaceView;
-    private boolean mUpdateSurfaceTexture;
     private final FloatBuffer mVertextBuffer;
     private final FloatBuffer mTextureBuffer;
+    private int mTextureId;
+    private SurfaceTexture mSurfaceTexture;
+    private boolean mUpdateSurfaceTexture;
     private int vertexPosition;
     private int texturePosition;
     private int samplerTexturePosition;

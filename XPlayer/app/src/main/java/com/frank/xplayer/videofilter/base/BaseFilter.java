@@ -19,21 +19,17 @@ import java.util.LinkedList;
 public class BaseFilter {
     private static final int POSITION_COMPONENT_COUNT = 2;
     private static final int TEXTURE_COMPONENT_COUNT = 2;
-
-    protected int mProgram;
     @RawRes
     private final int mVertexShaderResId;
     @RawRes
     private final int mFragmentShaderResId;
-
+    //渲染线程
+    private final LinkedList<Runnable> mRunOnDraw = new LinkedList();
+    protected int mProgram;
     private boolean mInited;
-
     private int vertexPosition;
     private int texturePosition;
     private int samplerTexturePosition;
-
-    //渲染线程
-    private final LinkedList<Runnable> mRunOnDraw = new LinkedList();
 
     public BaseFilter() {
         this(R.raw.video_no_filter_vertex_shader, R.raw.video_no_filter_fragment_shader);

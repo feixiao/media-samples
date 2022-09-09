@@ -795,6 +795,7 @@ public class GLTextureView extends TextureView implements TextureView.SurfaceTex
 
         void destroySurface(EGL10 egl, EGLDisplay display, EGLSurface surface);
     }
+
     /**
      * An interface for choosing an EGLConfig configuration from a list of
      * potential configurations.
@@ -846,12 +847,12 @@ public class GLTextureView extends TextureView implements TextureView.SurfaceTex
      */
 
     private static class EglHelper {
+        private final WeakReference<GLTextureView> mGLTextureViewWeakRef;
         EGL10 mEgl;
         EGLDisplay mEglDisplay;
         EGLSurface mEglSurface;
         EGLConfig mEglConfig;
         EGLContext mEglContext;
-        private final WeakReference<GLTextureView> mGLTextureViewWeakRef;
 
         public EglHelper(WeakReference<GLTextureView> glTextureViewWeakRef) {
             mGLTextureViewWeakRef = glTextureViewWeakRef;
@@ -1120,6 +1121,13 @@ public class GLTextureView extends TextureView implements TextureView.SurfaceTex
      * sGLThreadManager object. This avoids multiple-lock ordering issues.
      */
     static class GLThread extends Thread {
+        private final ArrayList<Runnable> mEventQueue = new ArrayList<Runnable>();
+        /**
+         * Set once at thread construction time, nulled out when the parent view is garbage
+         * called. This weak reference allows the GLTextureView to be garbage collected while
+         * the GLThread is still alive.
+         */
+        private final WeakReference<GLTextureView> mGLTextureViewWeakRef;
         // Once the thread is started, all accesses to the following member
         // variables are protected by the sGLThreadManager monitor
         private boolean mShouldExit;
@@ -1138,15 +1146,9 @@ public class GLTextureView extends TextureView implements TextureView.SurfaceTex
         private int mRenderMode;
         private boolean mRequestRender;
         private boolean mRenderComplete;
-        private final ArrayList<Runnable> mEventQueue = new ArrayList<Runnable>();
         private boolean mSizeChanged = true;
         private EglHelper mEglHelper;
-        /**
-         * Set once at thread construction time, nulled out when the parent view is garbage
-         * called. This weak reference allows the GLTextureView to be garbage collected while
-         * the GLThread is still alive.
-         */
-        private final WeakReference<GLTextureView> mGLTextureViewWeakRef;
+
         GLThread(WeakReference<GLTextureView> glTextureViewWeakRef) {
             super();
             mWidth = 0;
@@ -1901,6 +1903,7 @@ public class GLTextureView extends TextureView implements TextureView.SurfaceTex
      * and at least the specified depth and stencil sizes.
      */
     private class ComponentSizeChooser extends BaseConfigChooser {
+        private final int[] mValue;
         // Subclasses can adjust these values:
         protected int mRedSize;
         protected int mGreenSize;
@@ -1908,7 +1911,7 @@ public class GLTextureView extends TextureView implements TextureView.SurfaceTex
         protected int mAlphaSize;
         protected int mDepthSize;
         protected int mStencilSize;
-        private final int[] mValue;
+
         public ComponentSizeChooser(int redSize, int greenSize, int blueSize,
                                     int alphaSize, int depthSize, int stencilSize) {
             super(new int[]{
