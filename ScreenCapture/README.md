@@ -30,8 +30,8 @@ Once you get a MediaProjection, use [createVirtualDisplay][4] and bind it to a S
 
 ### Screenshots
 
-<img src="screenshots/main.png" height="400" alt="Screenshot"/> 
+![](./screenshots/main.png) 
 
 ### 参考资料
-+ [《ndroid端录屏采集实现教程》](https://www.zego.im/article/androidlupingcaiji)
++ [《Android端录屏采集实现教程》](https://www.zego.im/article/androidlupingcaiji)
 
