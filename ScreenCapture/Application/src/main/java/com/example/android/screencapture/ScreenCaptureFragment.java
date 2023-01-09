@@ -120,6 +120,8 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // 监听onActivityResult  根据用户授权返回的结果获取 MediaProjection
         if (requestCode == REQUEST_MEDIA_PROJECTION) {
             if (resultCode != Activity.RESULT_OK) {
                 Log.i(TAG, "User cancelled");
@@ -133,7 +135,11 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
             Log.i(TAG, "Starting screen capture");
             mResultCode = resultCode;
             mResultData = data;
+
+            // 在这里我们才是获取到了真正的屏幕录制操作对象 —— MediaProjection，接下来我们就需要通过这个对象去开启屏幕录制。
             setUpMediaProjection();
+
+            // 要创建一个虚拟屏幕——VirtualDisplay，这一步是屏幕录制的关键所在
             setUpVirtualDisplay();
         }
     }
@@ -175,6 +181,9 @@ public class ScreenCaptureFragment extends Fragment implements View.OnClickListe
         } else {
             Log.i(TAG, "Requesting confirmation");
             // This initiates a prompt dialog for the user to confirm screen projection.
+
+            // MediaProjectManager 已经封装了获取 Intent 的方法 createScreenCaptureIntent， 拿到 Intent 之后，
+            // 当调用 startActivityForResult 方法时，会触发一个请求授权的弹窗，当用户同意授权或者拒绝授权，都会通过 onActivityResult 返回。
             startActivityForResult(
                     mMediaProjectionManager.createScreenCaptureIntent(),
                     REQUEST_MEDIA_PROJECTION);

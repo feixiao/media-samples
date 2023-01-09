@@ -28,10 +28,14 @@ Once you get a MediaProjection, use [createVirtualDisplay][4] and bind it to a S
 - Android Build Tools v28.0.3
 - Android Support Repository
 
+### 类似例子
++ [MediaProjectionDemo](https://github.com/feixiao/MediaProjectionDemo)
+
 ### Screenshots
 
 ![](./screenshots/main.png) 
 
-### 参考资料
-+ [《Android端录屏采集实现教程》](https://www.zego.im/article/androidlupingcaiji)
 
+### 参考资料
++ [《Android端录屏采集实现教程》](https://blog.csdn.net/zego_0616/article/details/118543818)
++ [《Android 截屏实现、屏幕截图、MediaProjection、ImageReader》](http://www.tlcement.com/112003.html)
