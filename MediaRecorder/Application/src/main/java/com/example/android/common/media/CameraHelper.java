@@ -211,6 +211,7 @@ public class CameraHelper {
         } else if(type == MEDIA_TYPE_VIDEO) {
             mediaFile = new File(mediaStorageDir.getPath() + File.separator +
                     "VID_"+ timeStamp + ".mp4");
+            Log.d("CameraSample", "mediaFile: " + mediaFile);
         } else {
             return null;
         }

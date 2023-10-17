@@ -16,10 +16,13 @@
 
 package com.example.android.mediarecorder;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.hardware.Camera;
 import android.media.CamcorderProfile;
 import android.media.MediaRecorder;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
@@ -50,6 +53,16 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = "Recorder";
     private Button captureButton;
 
+    /**
+     * 求情读文件权限
+     */
+    private static final int REQUEST_READ_STORAGE = 0x01;
+    /**
+     * 请求读取文件
+     */
+    private static final int REQUEST_RECORD_AUDIO = 0X01;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +70,23 @@ public class MainActivity extends AppCompatActivity {
 
         mPreview = findViewById(R.id.surface_view);
         captureButton = findViewById(R.id.button_capture);
+
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_READ_STORAGE);
+            }
+            if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQUEST_RECORD_AUDIO);
+            }
+
+            if (checkSelfPermission(Manifest.permission.MODIFY_AUDIO_SETTINGS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{Manifest.permission.MODIFY_AUDIO_SETTINGS}, REQUEST_RECORD_AUDIO);
+            }
+        }
+
+
     }
 
     /**
